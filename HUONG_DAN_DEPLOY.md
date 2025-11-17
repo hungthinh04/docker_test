@@ -73,7 +73,7 @@ docker-compose up -d --build
    - Thêm từng biến:
      - Key: `NODE_ENV` → Value: `production`
      - Key: `PORT` → Value: `5000`
-     - Key: `FRONTEND_URL` → Value: `https://your-app.vercel.app` (tạm thời, sẽ cập nhật sau)
+     - Key: `FRONTEND_URL` → Value: `https://your-app.vercel.app` ⚠️ **KHÔNG có dấu `/` ở cuối**
 
    **Cách 2: Thêm sau khi đã tạo service**
 
@@ -109,8 +109,10 @@ docker-compose up -d --build
 Quay lại Render → Click vào service **"backend-app"** → Tab **"Environment"**:
 
 - Tìm biến `FRONTEND_URL` → Click **"Edit"** (hoặc xóa và thêm lại)
-- Cập nhật Value = URL Vercel của bạn (ví dụ: `https://your-app.vercel.app`)
+- Cập nhật Value = URL Vercel của bạn (ví dụ: `https://your-app.vercel.app`) ⚠️ **KHÔNG có dấu `/` ở cuối**
 - Click **"Save Changes"** → Render sẽ tự động redeploy
+
+**Lưu ý:** Nếu gặp lỗi CORS, kiểm tra xem `FRONTEND_URL` có dấu `/` ở cuối không. Code đã tự động handle, nhưng tốt nhất là không có dấu `/`.
 
 ---
 

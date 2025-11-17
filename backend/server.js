@@ -8,8 +8,22 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+const getCorsOrigin = () => {
+  const frontendUrl = process.env.FRONTEND_URL;
+
+  if (!frontendUrl || frontendUrl === "*") {
+    return "*";
+  }
+
+  // Normalize URL - remove trailing slash
+  const normalizedUrl = frontendUrl.replace(/\/+$/, "");
+
+  // Return array với cả 2 versions (có và không có trailing slash) để tránh CORS error
+  return [normalizedUrl, `${normalizedUrl}/`];
+};
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "*",
+  origin: getCorsOrigin(),
   credentials: true,
 };
 app.use(cors(corsOptions));
